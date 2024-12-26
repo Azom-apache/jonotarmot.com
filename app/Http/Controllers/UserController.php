@@ -53,6 +53,7 @@ class UserController extends Controller
         $user->language = $request->input('language');
         $user->age = date('Y-m-d', strtotime($request->input('age')));
         $otp = rand(100000, 999999);
+        $otp = 1234;
         $user->otp = $otp;
         $user->save();
 
@@ -63,7 +64,7 @@ class UserController extends Controller
         $admin->password = Hash::make($request->input('password'));
         $admin->role ='user';
         $admin->save();
-        Mail::to($user->email)->send(new OtpMail($otp));
+      //  Mail::to($user->email)->send(new OtpMail($otp));
        
         if ($user->id) {
             session(['user_id' => $user->id, 'otp' => $otp]); 
