@@ -65,7 +65,8 @@ class UserController extends Controller
         $admin->role ='user';
         $admin->save();
         return redirect()->route('dashboard')->with('success', 'Poll created successfully!');
-      //  Mail::to($user->email)->send(new OtpMail($otp));
+      
+        //  Mail::to($user->email)->send(new OtpMail($otp));
        
         // if ($user->id) {
         //     session(['user_id' => $user->id, 'otp' => $otp]); 
