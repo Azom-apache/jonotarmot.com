@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('age');
             $table->string('country')->nullable();
             $table->string('city')->nullable();
-            $table->string('language');
+            $table->string('language')->nullable();
             $table->string('profile_pic')->nullable();
             $table->string('phone')->nullable();
             $table->string('professional_situation')->nullable();

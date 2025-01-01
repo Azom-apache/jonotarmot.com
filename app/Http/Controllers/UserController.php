@@ -34,12 +34,12 @@ class UserController extends Controller
     {
         $request->validate([
             'first_name' => 'string|required',
-            'last_name' => 'string|required',
+            'last_name' => 'string|nullable',
             'email' => 'string|required|email|unique:users,email',
             'password' => 'string|required|min:8',
-            'country' => 'string|required',
-            'language' => 'string|required',
-            'age' => 'string|required',
+            'country' => 'string|nullable',
+            'language' => 'string|nullable',
+            'age' => 'string|nullable',
             // Add more validation rules as needed
         ]);
         $username = $request->input('first_name');
@@ -64,14 +64,15 @@ class UserController extends Controller
         $admin->password = Hash::make($request->input('password'));
         $admin->role ='user';
         $admin->save();
+        return redirect()->route('dashboard')->with('success', 'Poll created successfully!');
       //  Mail::to($user->email)->send(new OtpMail($otp));
        
-        if ($user->id) {
-            session(['user_id' => $user->id, 'otp' => $otp]); 
-            return view('verify-otp');
-        } else {
-            return back()->withInput()->withErrors(['registration_failed' => 'Failed to register user']);
-        }
+        // if ($user->id) {
+        //     session(['user_id' => $user->id, 'otp' => $otp]); 
+        //     return view('verify-otp');
+        // } else {
+        //     return back()->withInput()->withErrors(['registration_failed' => 'Failed to register user']);
+        // }
     }
 
     /**
